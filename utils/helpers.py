@@ -1,7 +1,8 @@
 import numpy as np
+import math
 
 def convert_to_text(patient_data):
-    """환자 데이터를 텍스트로 변환"""
+    """Convert patient data into text"""
     full_text = (
         f"This patient is {patient_data['age']} years old, "
         f"{'male' if patient_data['sex'] == 1.0 else 'female'}. "
@@ -32,7 +33,7 @@ def convert_to_text(patient_data):
     return ''.join(full_text)
 
 def convert_to_json(patient_data):
-    """환자 데이터를 JSON 형식으로 변환"""
+    """Convert patient data into JSON format"""
     patient_json = {
         "age": patient_data["age"],
         "sex": "male" if patient_data["sex"] == 1.0 else "female",
@@ -62,7 +63,7 @@ def convert_to_json(patient_data):
     return patient_json
 
 def extract_log_probs(data):
-    """로그 확률 추출"""
+    """Extract log probabilities"""
     true_log_prob = None
     false_log_prob = None
 
@@ -81,7 +82,7 @@ def extract_log_probs(data):
     return true_log_prob, false_log_prob
 
 def softmax(log_probs):
-    """소프트맥스 함수"""
+    """Softmax function"""
     probs = [math.exp(lp) for lp in log_probs]
     total = sum(probs)
     return [p / total for p in probs]
