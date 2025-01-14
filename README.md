@@ -1,4 +1,3 @@
-```markdown
 # LLM-vs-ML-PostOp
 
 This repository contains the code and resources for the study **"Large Language Models vs. Machine Learning for Predicting Postoperative Outcomes"**. The study investigates the potential of large language models (LLMs) as scalable alternatives to traditional machine learning models (e.g., XGBoost) for predicting critical postoperative outcomes, such as in-hospital 30-day mortality, ICU admission, and acute kidney injury.
