@@ -4,12 +4,6 @@ This repository contains the code and resources for the study **"Large Language 
 
 ---
 
-## Abstract
-
-Artificial intelligence has revolutionized medicine, yet the development of generalizable models remains constrained by data scarcity, heterogeneity, and stringent privacy regulations. This study investigates the potential of large language models (LLMs)—GPT-4o, Llama-3-70B, and OpenBioLLM-70B—as scalable alternatives to conventional machine learning models (XGBoost) for predicting critical postoperative outcomes, including in-hospital 30-day mortality, ICU admission, and acute kidney injury. Using real-world perioperative datasets from South Korea (INSPIRE) and the United States (MOVER), we evaluated model performance through internal and external validation. Results demonstrated that LLMs, particularly OpenBioLLM-70B, achieved comparable discriminative performance to XGBoost in predicting 30-day mortality and acute kidney injury, while outperforming XGBoost in external validation for ICU admission prediction (p < 0.05). Open-source LLMs (OpenBioLLM-70B and Llama-3-70B) also maintained performance with 4-bit quantization, reducing computational requirements by 75%, and demonstrated compatibility with on-premises deployment, addressing critical data privacy concerns. These findings highlight the potential of LLMs as versatile, efficient tools for clinical decision support, though further validation across diverse datasets and improved calibration techniques are needed to enhance their reliability and applicability in real-world healthcare settings.
-
----
-
 ## Repository Structure
 
 ```
@@ -62,39 +56,3 @@ This will:
 3. Generate predictions and save the results.
 
 ---
-
-## Key Findings
-
-- **Comparable Performance**: LLMs (especially OpenBioLLM-70B) achieved comparable performance to XGBoost in predicting 30-day mortality and acute kidney injury.
-- **External Validation**: LLMs outperformed XGBoost in external validation for ICU admission prediction (p < 0.05).
-- **Efficiency**: Open-source LLMs maintained performance with 4-bit quantization, reducing computational requirements by 75%.
-- **Privacy**: LLMs demonstrated compatibility with on-premises deployment, addressing data privacy concerns.
-
----
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Citation
-
-If you use this code or findings in your research, please cite our work:
-
-```plaintext
-[To be updated with the full citation once the paper is published.]
-```
-
----
-
-## Contact
-
-For questions or feedback, please contact [Jipyeong Lee] at [easypyeong@gmail.com].
-```
