@@ -10,17 +10,17 @@ from tqdm import tqdm
 from vllm import SamplingParams
 
 def run():
-    """메인 실행 함수"""
-    # 1. 환경 변수 설정
+    """Main execution function"""
+    # 1. Set environment variables
     set_environment_variables()
 
-    # 2. 데이터 로드
+    # 2. Load data
     x_train, y_train, x_valid, y_valid, x_test, y_test = load_data()
 
-    # 3. 데이터 전처리 (결측치 처리)
+    # 3. Preprocess data (handle missing values)
     x_train_imputed, x_valid_imputed, x_test_imputed = impute_data(x_train, x_valid, x_test)
 
-    # 4. 텍스트 및 JSON 형식으로 변환
+    # 4. Convert to text and JSON format
     x_train['text'] = x_train_imputed.apply(lambda x: convert_to_text(x), axis=1)
     x_valid['text'] = x_valid_imputed.apply(lambda x: convert_to_text(x), axis=1)
     x_test['text'] = x_test_imputed.apply(lambda x: convert_to_text(x), axis=1)
@@ -29,10 +29,10 @@ def run():
     x_valid['json'] = x_valid_imputed.apply(lambda x: convert_to_json(x), axis=1)
     x_test['json'] = x_test_imputed.apply(lambda x: convert_to_json(x), axis=1)
 
-    # 5. LLM 모델 설정
+    # 5. Set up the LLM model
     llm = setup_llm()
 
-    # 6. 프롬프트 생성
+    # 6. Generate prompts
     first_sentence = """
     This patient is 75.0 years old, female. Requiring emergency operation. The Body Mass Index (BMI) is 20.811654526534856. Preoperative tests show glucose levels at 110.0 milligrams per deciliter, hemoglobin at 11.0 grams per deciliter, albumin levels at 3.6 grams per deciliter, creatinine levels at 5.55 milligrams per deciliter, Blood Urea Nitrogen (BUN) at 50.0 milligrams per deciliter, platelet count at 200.0 times 10 to the power of 9 per liter, white blood cell (WBC) count at 7.9 times 10 to the power of 9 per liter, Activated Partial Thromboplastin Time (APTT) at 29.6 seconds, Prothrombin Time International Normalized Ratio (PT INR) at 0.9, sodium at 132.0 millimoles per liter, potassium at 5.3 millimoles per liter, Aspartate Aminotransferase (AST) at 19.0 Units per Liter, Alanine Aminotransferase (ALT) at 11.0 Units per Liter, and anesthesia duration was 200.0 minutes.
     """.strip()
@@ -75,7 +75,7 @@ Based on the overall profile, the patient's preoperative condition does not indi
     dataset_test = pd.DataFrame(x_test)
     dataset_test = generate_prompts(dataset_test, first_sentence, first_reason, second_sentence, second_reason)
 
-    # 7. 모델 추론
+    # 7. Model inference
     sampling_params = SamplingParams(
         max_tokens=30,
         temperature=0.0,
@@ -103,7 +103,7 @@ Based on the overall profile, the patient's preoperative condition does not indi
         result = output.outputs[0]
         test_2shot_false.append(result)
 
-    # 8. 결과 처리 및 저장
+    # 8. Process and save results
     valid_2shot_false_probs = []
     test_2shot_false_probs = []
 
@@ -119,7 +119,7 @@ Based on the overall profile, the patient's preoperative condition does not indi
         probabilities = softmax(log_probs)
         test_2shot_false_probs.append(probabilities[1])
 
-    # 9. 결과 저장 (익명화된 경로)
+    # 9. Save results (anonymized path)
     output_path = os.getenv('OUTPUT_PATH', '/path/to/anonymous/output')
     param_type = 'BF16'
     input_type = 'sentence'
