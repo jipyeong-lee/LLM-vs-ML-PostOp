@@ -5,4 +5,4 @@ scikit-learn
 vllm
 transformers
 tqdm
-python-dotenv  # .env 파일 로드를 위해 추가
+python-dotenv
