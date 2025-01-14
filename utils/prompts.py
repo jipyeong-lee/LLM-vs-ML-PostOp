@@ -1,5 +1,5 @@
 def generate_prompts(dataset, first_sentence, first_reason, second_sentence, second_reason):
-    """프롬프트 생성"""
+    """Generate prompts"""
     prompt_template_2shot_false = '''
 def predict_inhosp_death_30day(raw_patient_data: Union[str, dict]) -> dict:
     """
